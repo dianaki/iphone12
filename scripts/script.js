@@ -86,7 +86,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  const modal = () => {
+    const cardDetailsButtonBuy = document.querySelector('.card-details__button_buy');
+    const cardDetailsButtonDelivery = document.querySelector('.card-details__button_delivery');
+    const modal = document.querySelector('.modal');
+    const modalSubtitle = document.querySelector('.modal__subtitle');
+    const modalTitle = document.querySelector('.modal__title');
+    const cardDetailsTitle = document.querySelector('.card-details__title');
+
+
+    const toggleModal = () => {
+      modal.classList.toggle('open');
+    }
+    
+    cardDetailsButtonBuy.addEventListener('click', () => {
+      toggleModal();
+      modalTitle.textContent = cardDetailsTitle.textContent;
+      modalSubtitle.textContent = cardDetailsButtonBuy.textContent;
+    });
+    
+    cardDetailsButtonDelivery.addEventListener('click', () => {
+      toggleModal();
+      modalTitle.textContent = cardDetailsTitle.textContent;
+      modalSubtitle.textContent = cardDetailsButtonDelivery.textContent;
+    });
+
+    modal.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target.classList.contains('modal__close') || target.classList.contains('modal')) {
+        toggleModal();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (modal.classList.contains('open') && event.keyCode === 27) {
+        toggleModal();
+      }
+    })
+  };
+
   tabs();
   accordeon();
+  modal();
 
 });
